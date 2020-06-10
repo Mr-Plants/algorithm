@@ -1,3 +1,4 @@
+// 1
 function sum(nums, target) {
   // 统一保管需求
   const obj = {}
