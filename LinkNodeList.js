@@ -38,24 +38,24 @@ class LinkNodeList {
   remove(val) {
     let prev
     let cur = this.head
-    while (cur) {
+    while (cur && cur.next) {
 
       if (cur.val === val) {
         // 删除表头元素
         if (cur === this.head) {
           this.head = cur.next
-          // cur = cur.next
         } else {
           prev.next = cur.next
           // cur.next = null
+          // 删除时prev应该不变
         }
         this.length -= 1
       } else {
         // 如果不删除，就继续向下查找
-
+        prev = cur
       }
       // 更新prev和next
-      prev = cur
+
       cur = cur.next
 
     }
