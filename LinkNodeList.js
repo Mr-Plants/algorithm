@@ -44,14 +44,20 @@ class LinkNodeList {
         // 删除表头元素
         if (cur === this.head) {
           this.head = cur.next
+          // cur = cur.next
         } else {
           prev.next = cur.next
-          cur.next = null
+          // cur.next = null
         }
+        this.length -= 1
+      } else {
+        // 如果不删除，就继续向下查找
+
       }
-      // 保存prev和next
+      // 更新prev和next
       prev = cur
       cur = cur.next
+
     }
   }
 
@@ -72,7 +78,8 @@ class LinkNodeList {
 let ln = new LinkNodeList()
 ln.append('A')
 ln.append('B')
+ln.append('B')
 ln.append('C')
-ln.append('D')
-ln.append('E')
+console.log(ln.print(), ln.length)
+ln.remove('B')  // todo 有问题
 console.log(ln.print(), ln.length)
