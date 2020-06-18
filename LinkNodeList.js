@@ -61,6 +61,22 @@ class LinkNodeList {
     }
   }
 
+  reverse() {
+    // 遍历节点，将cur节点的next指向prev，head节点指向null
+    let cur = this.head
+    let prev = null
+    let next = null
+
+
+    while (cur) {
+      next = cur.next
+      cur.next = prev
+      prev = cur
+      cur = next
+    }
+    this.head = prev
+  }
+
   print() {
     // 将链表的值存入数组，join展示
     let cur = this.head
@@ -83,3 +99,5 @@ ln.append('C')
 console.log(ln.print(), ln.length)
 ln.remove('B')  // todo 有问题
 console.log(ln.print(), ln.length)
+ln.reverse()
+console.log(ln.print())
