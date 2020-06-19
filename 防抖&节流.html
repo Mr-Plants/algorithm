@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<h2>防抖</h2>
+<input type="text" id="input">
+
+<h2>节流</h2>
+<div>页面resize</div>
+<script>
+  /**
+   * 防抖：n秒内只要事件没有再次触发就执行函数
+   * 高频事件被触发后在n秒内函数只会执行一次，如果n秒内事件被再次触发，则重新计算时间
+   * 实现思路：如果函数被重新触发，就取消之前的定时器，重新开始
+   * @param fn
+   * @param delay
+   */
+  function debounce(fn, delay) {
+    // 使用闭包，也可以使用单例debounce.timer
+    let timer = null
+    return function () {
+      if (timer) {
+        clearTimeout(timer)
+      }
+      console.log(this)  // 此处this依然正常
+      timer = setTimeout(() => {
+        // 此处如果不用箭头函数，this将指向window，而不是触发事件的input
+        console.log(this)
+        fn.apply(this, arguments)
+      }, delay)
+    }
+  }
+
+  // todo 防抖如何过滤中文输入
+
+  function callback() {
+    console.log(this)  // 如果不修正this指向，此处会指向window
+    console.log('防抖函数成功触发！！')
+  }
+
+  function callback2() {
+    console.log('没有防抖做对比！！')
+  }
+
+  document.getElementById('input').addEventListener('input', debounce(callback, 500))
+  // document.getElementById('input').addEventListener('input', callback2)
+
+  // document.getElementById('input').addEventListener('change', callback2)  // 不能使用change事件，只在失去焦点触发
+
+  /**
+   * 节流：n秒内只执行一次
+   * n秒内高频事件只会被触发一次，稀释函数触发频率
+   * 思路：每次触发时判断是否有等待执行的延迟函数，有就掠过
+   * 通过取模或者delay时间控制
+   * @param fn
+   * @param delay
+   */
+  function throttle(fn, delay) {
+    let timer = null;
+    return function () {
+      if (!timer) {
+        timer = setTimeout(() => {
+          fn.apply(this, arguments)
+          clearTimeout(timer)
+          timer = null
+        }, delay)
+      }
+    }
+  }
+
+  function callback3() {
+    console.log('触发resize', this.innerWidth)
+  }
+
+  window.addEventListener('resize', throttle(callback3, 1000))
+</script>
+</body>
+</html>
