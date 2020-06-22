@@ -100,6 +100,8 @@ class LinkNodeList {
 
   }
 
+  // 判断是否有环
+  // 也可以通过set唯一性来做，每次存进去，如果下次在set中发现相同的节点就证明有环
   hasCycle() {
     // 如果存在环，则会进入死循环
     // 使用快慢指针
@@ -116,6 +118,30 @@ class LinkNodeList {
     }
     // 能循环完表示没有环
     return false
+  }
+
+  // 找到环形节点的第一个节点，如果没有环形节点，就返回null
+  detectCycle() {
+    let fast = this.head
+    let slow = this.head
+    let start = this.head
+    while (fast && fast.next) {
+      fast = fast.next.next
+      slow = slow.next
+      if (slow === fast) {
+        while (start && slow) {
+          // 条件写在上面是因为如果是一个完全的闭环，则链表的第一个节点就是环的第一个节点，如果写在下面，就会return错误的节点
+          if (start === slow) {
+            return slow
+          }
+          slow = slow.next
+          start = start.next
+        }
+      }
+
+    }
+
+    return null  // 走到这里，说明没有环
   }
 
   print() {
