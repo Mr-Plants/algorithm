@@ -10,8 +10,9 @@ class NodeList {
 /**
  * 单链表实现增删
  */
-class SinglyLinkedList {
+export default class SinglyLinkedList {
   head = null;
+  length = 0;
 
   /*
   思路：
@@ -35,19 +36,26 @@ class SinglyLinkedList {
       }
       cur.next = node;
     }
+    this.length++;
     return node;
+  }
+
+  get length() {
+    return this.length;
   }
 
   /*
   思路：
-如果
+设置prev
    */
   remove(val) {
+    let prev;
     let cur = this.head;
     while (cur.next) {
       if (cur.val === val) {
-        cur.next = cur.next.next;
+        prev.next = cur.next;
       }
+      prev = cur;
       cur = cur.next;
     }
     return this.head;
