@@ -40,13 +40,9 @@ export default class SinglyLinkedList {
     return node;
   }
 
-  get length() {
-    return this.length;
-  }
-
   /*
   思路：
-设置prev
+  设置prev
    */
   remove(val) {
     let prev;
@@ -79,5 +75,5 @@ list.append(666)
 list.append(588)
 list.append(99)
 list.print();
-list.remove(588)
+list.remove(99)
 list.print();
