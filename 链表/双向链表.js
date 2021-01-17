@@ -72,6 +72,7 @@ class DoublyLinkedList {
     this.head = guard.next;
   }
 
+  // todo 这个方法有问题，tail指针不对
   insertAfter(node, val) {
     if (!node || !node instanceof NodeList) return;
     const newNode = new NodeList(val);
