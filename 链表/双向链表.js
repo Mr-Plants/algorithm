@@ -15,7 +15,7 @@ class DoublyLinkedList {
   tail = null;
   length = 0;
 
-  append(val) {
+  append2(val) {
     let guard = new NodeList('');
     guard.next = this.head;
     let cur = guard;
@@ -41,8 +41,7 @@ class DoublyLinkedList {
   更新尾节点：tail=newNode
    */
 
-  // todo 加入了尾节点就能让链表的新增操作复杂度变为O(1)?
-  add(val) {
+  append(val) {
     const newNode = new NodeList(val);
     if (!this.head) {
       this.head = newNode;
@@ -55,26 +54,67 @@ class DoublyLinkedList {
     return newNode;
   }
 
+  /*
+  思路：
+  遍历链表找到值为val的节点，删除
+   */
   remove(val) {
-
+    let guard = new NodeList('guard')
+    guard.next = this.head;
+    let cur = guard;
+    while (cur.next) {
+      if (cur.next.val === val) {
+        cur.next = cur.next.next;
+      } else {
+        cur = cur.next;
+      }
+    }
+    this.head = guard.next;
   }
 
   insertAfter(node, val) {
-    if (!node instanceof NodeList) return;
+    if (!node || !node instanceof NodeList) return;
     const newNode = new NodeList(val);
-    newNode.next = node.next;
-    node.next = newNode;
+    const {next} = node;
+
+    if (node === this.tail) {
+      this.tail = newNode;
+    }
+    // newNode.next = node.next;
+    // node.next = newNode;
+    this.length++;
   }
 
+  // 这是和单向链表区别最大的点，因为存储了prev前驱节点，所以可以在O(1)复杂度插入
   insertBefore(node, val) {
+    if (!node || !node instanceof NodeList) return;
+    const newNode = new NodeList(val)
+    if (node === this.head) {
+      newNode.next = this.head;
+      this.head.prev = newNode;
+      this.head = newNode;
+    } else {
+      const {prev} = node;
+      newNode.prev = prev;
+      prev.next = newNode;
 
+      newNode.next = node;
+      node.prev = newNode;
+    }
   }
 
-  // 双向链表支持
+  // 双向链表支持O(1)时间复杂度内删除一个节点，但是单向链表必须要从头遍历找到被删除节点的prev前驱节点O(n)
   removeByPointer(node) {
-    if (!node instanceof NodeList) return;
+    if (!node || !node instanceof NodeList) return;
+    if (node === this.head) {
+      this.head = null;
+    } else if (node === this.tail) {
+      this.tail = this.tail.prev;
+    } else {
+      node.prev.next = node.next;
+    }
+    this.length--;
 
-    node.prev = node.next;
   }
 
   find(val) {
@@ -95,8 +135,26 @@ class DoublyLinkedList {
 
 
 let linkedList = new DoublyLinkedList();
-linkedList.add(1);
-linkedList.add(2);
-linkedList.add(3);
+linkedList.append(1);
+// linkedList.append(2);
+// linkedList.append(3);
+// linkedList.insertAfter(linkedList.head, 999)
+// linkedList.insertAfter(linkedList.tail, 666)
 linkedList.print();
 
+// linkedList.removeByPointer(linkedList.head);
+linkedList.insertBefore(linkedList.head, 888)
+linkedList.print();
+linkedList.insertBefore(linkedList.tail, 5656)
+linkedList.print();
+
+/*
+todo 重要！！！
+写完链表后一定要作如下检查：
+1、如果链表是空（head=null），操作是否正常
+2、如果链表只有一个元素（head=tail），操作是否正常
+3、如果链表有两个元素，操作是否正常
+4、如果要操作head或tail，是否正常
+5、检查链表的length和head以及tail的值是否更新
+6、如果是双向链表，还要检查以下节点的prev属性是否更新
+ */
