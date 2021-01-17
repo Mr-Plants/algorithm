@@ -4,6 +4,8 @@
 4、实现求链表的中间结点
 5、LRU缓存淘汰算法
 6、链表实现回文字符串判断
+7、链表判断是否有环
+8、删除链表倒数第 n 个结点
 
 leeCode：
 https://leetcode-cn.com/problems/linked-list-cycle/

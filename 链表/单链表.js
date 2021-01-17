@@ -1,16 +1,14 @@
 class NodeList {
-  val;
-  next = null;
-
   constructor(val) {
     this.val = val;
+    this.next = null;
   }
 }
 
 /**
  * 单链表实现增删
  */
-export default class SinglyLinkedList {
+class SinglyLinkedList {
   head = null;
   length = 0;
 
@@ -21,16 +19,13 @@ export default class SinglyLinkedList {
   如果cur.next还存在，就继续向下查找，直到cur.next不存在，就找到了尾节点
   将尾节点的next指向新建的节点
    */
-  append(val) {
+  append2(val) {
     const node = new NodeList(val);
     if (!this.head) {
       this.head = node;
     } else {
       let cur = this.head;
-      // fixme 此处不能这么写，因为这样会把cur指向null，后续取值会报错
-      // while (cur) {
-      //   cur = cur.next;
-      // }
+      // 找到尾节点
       while (cur.next) {
         cur = cur.next;
       }
@@ -40,16 +35,48 @@ export default class SinglyLinkedList {
     return node;
   }
 
+  append(val) {
+    let guard = new NodeList('');
+    guard.next = this.head;
+    const newNode = new NodeList(val);
+    let cur = guard;
+    while (cur.next) {
+      cur = cur.next;
+    }
+    //  cur走到这里时,cur.next肯定是null
+    cur.next = newNode;
+    this.head = guard.next;
+    this.length++;
+  }
+
+  remove(val) {
+    let guard = new NodeList('');
+    guard.next = this.head;
+    let cur = guard;
+
+    while (cur.next) {
+      if (cur.next.val === val) {
+        cur.next = cur.next.next;
+        this.length--;
+        // 删除完以后不需要改变指针，继续从这个节点往下遍历
+      } else {
+        cur = cur.next;
+      }
+    }
+    this.head = guard.next;  // 重新定义头指针，防止首节点被删除后，this.head指向没变
+  }
+
   /*
   思路：
   设置prev
    */
-  remove(val) {
+  remove2(val) {
     let prev;
     let cur = this.head;
-    while (cur.next) {
+    while (cur) {
       if (cur.val === val) {
         prev.next = cur.next;
+        this.length--;
       }
       prev = cur;
       cur = cur.next;
@@ -72,8 +99,6 @@ export default class SinglyLinkedList {
 let list = new SinglyLinkedList();
 list.append(2333)
 list.append(666)
-list.append(588)
-list.append(99)
-list.print();
-list.remove(99)
+// list.append(588)
+// list.append(99)
 list.print();
