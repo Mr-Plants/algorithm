@@ -39,6 +39,7 @@ class CircularLinkedList {
     while (cur) {
       arr.push(cur.val);
       cur = cur.next;
+      // fixme 也可以参考使用pos
       if (cur === this.head) break;
     }
     console.log(arr.join('->'))
