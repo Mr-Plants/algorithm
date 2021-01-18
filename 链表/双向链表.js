@@ -72,17 +72,19 @@ class DoublyLinkedList {
     this.head = guard.next;
   }
 
-  // todo 这个方法有问题，tail指针不对
+
   insertAfter(node, val) {
     if (!node || !node instanceof NodeList) return;
     const newNode = new NodeList(val);
-    const {next} = node;
 
+    const {next} = node;
+    newNode.prev = node;
+    node.next = newNode;
+
+    newNode.next = next;
     if (node === this.tail) {
       this.tail = newNode;
     }
-    // newNode.next = node.next;
-    // node.next = newNode;
     this.length++;
   }
 
@@ -140,14 +142,15 @@ linkedList.append(1);
 // linkedList.append(2);
 // linkedList.append(3);
 // linkedList.insertAfter(linkedList.head, 999)
-// linkedList.insertAfter(linkedList.tail, 666)
+linkedList.insertAfter(linkedList.tail, 666)
+linkedList.insertAfter(linkedList.tail, 888)
 linkedList.print();
 
 // linkedList.removeByPointer(linkedList.head);
-linkedList.insertBefore(linkedList.head, 888)
-linkedList.print();
-linkedList.insertBefore(linkedList.tail, 5656)
-linkedList.print();
+// linkedList.insertBefore(linkedList.head, 888)
+// linkedList.print();
+// linkedList.insertBefore(linkedList.tail, 5656)
+// linkedList.print();
 
 /*
 todo 重要！！！
