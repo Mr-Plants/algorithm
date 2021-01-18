@@ -65,11 +65,13 @@ class DoublyLinkedList {
     while (cur.next) {
       if (cur.next.val === val) {
         cur.next = cur.next.next;
+        this.length--;
       } else {
         cur = cur.next;
       }
     }
     this.head = guard.next;
+    this.tail = cur;
   }
 
 
@@ -91,7 +93,7 @@ class DoublyLinkedList {
   // 这是和单向链表区别最大的点，因为存储了prev前驱节点，所以可以在O(1)复杂度插入
   insertBefore(node, val) {
     if (!node || !node instanceof NodeList) return;
-    const newNode = new NodeList(val)
+    const newNode = new NodeList(val);
     if (node === this.head) {
       newNode.next = this.head;
       this.head.prev = newNode;
@@ -104,15 +106,26 @@ class DoublyLinkedList {
       newNode.next = node;
       node.prev = newNode;
     }
+    this.length++;
   }
 
   // 双向链表支持O(1)时间复杂度内删除一个节点，但是单向链表必须要从头遍历找到被删除节点的prev前驱节点O(n)
   removeByPointer(node) {
     if (!node || !node instanceof NodeList) return;
     if (node === this.head) {
-      this.head = null;
+      const {next} = node;
+      node.next = null;
+      this.head = next;
+      if (next) {
+        next.prev = null
+      }
     } else if (node === this.tail) {
-      this.tail = this.tail.prev;
+      const {prev} = node;
+      node.prev = null;
+      this.tail = prev;
+      if (prev) {
+        prev.next = null;
+      }
     } else {
       node.prev.next = node.next;
     }
@@ -121,7 +134,16 @@ class DoublyLinkedList {
   }
 
   find(val) {
-
+    let pos = -1;
+    let cur = this.head;
+    while (cur) {
+      if (cur.val === val) {
+        return cur;
+      } else {
+        cur = cur.next;
+      }
+    }
+    return pos;
   }
 
   print() {
@@ -138,15 +160,22 @@ class DoublyLinkedList {
 
 
 let linkedList = new DoublyLinkedList();
-linkedList.append(1);
+// const l1 = linkedList.append(1);
 // linkedList.append(2);
 // linkedList.append(3);
+linkedList.insertBefore(linkedList.head,2333)
 // linkedList.insertAfter(linkedList.head, 999)
-linkedList.insertAfter(linkedList.tail, 666)
-linkedList.insertAfter(linkedList.tail, 888)
+// linkedList.insertAfter(linkedList.tail, 666)
+// linkedList.insertAfter(linkedList.tail, 888)
 linkedList.print();
 
+// console.log(linkedList.find(1));
+
+// linkedList.removeByPointer(l1);
+linkedList.print();
 // linkedList.removeByPointer(linkedList.head);
+// linkedList.print();
+// linkedList.removeByPointer(linkedList.tail);
 // linkedList.insertBefore(linkedList.head, 888)
 // linkedList.print();
 // linkedList.insertBefore(linkedList.tail, 5656)
@@ -162,3 +191,7 @@ todo 重要！！！
 5、检查链表的length和head以及tail的值是否更新
 6、如果是双向链表，还要检查以下节点的prev属性是否更新
  */
+
+module.exports = {
+  DoublyLinkedList
+}
