@@ -91,44 +91,51 @@ class DoublyLinkedList {
   }
 
   // 这是和单向链表区别最大的点，因为存储了prev前驱节点，所以可以在O(1)复杂度插入
+  /*
+  思路：
+  1、保存node节点的prev指针，prev可能为null（node=head）
+  2、改变newNode的next指针
+  3、改变newNode的prev指针
+  4、改变node的prev指针
+  5、插入可能改变了head指针，需要修正head指针
+   */
   insertBefore(node, val) {
     if (!node || !node instanceof NodeList) return;
     const newNode = new NodeList(val);
-    if (node === this.head) {
-      newNode.next = this.head;
-      this.head.prev = newNode;
-      this.head = newNode;
-    } else {
-      const {prev} = node;
-      newNode.prev = prev;
+    let {prev} = node;
+    node.prev = newNode;
+    newNode.next = node;
+    if (prev) {
       prev.next = newNode;
-
-      newNode.next = node;
-      node.prev = newNode;
+      newNode.prev = prev;
+    } else {
+      this.head = newNode;
     }
+
     this.length++;
   }
 
   // 双向链表支持O(1)时间复杂度内删除一个节点，但是单向链表必须要从头遍历找到被删除节点的prev前驱节点O(n)
   removeByPointer(node) {
     if (!node || !node instanceof NodeList) return;
-    if (node === this.head) {
-      const {next} = node;
-      node.next = null;
-      this.head = next;
-      if (next) {
-        next.prev = null
-      }
-    } else if (node === this.tail) {
-      const {prev} = node;
-      node.prev = null;
-      this.tail = prev;
-      if (prev) {
-        prev.next = null;
-      }
+
+    let {prev, next} = node;
+    // 首先断开自己和链表的关系
+    // todo 不断开好像也没什么关系
+    node.prev = null;
+    node.next = null
+    // 然后建立新关系
+    if (prev) {
+      prev.next = next;
     } else {
-      node.prev.next = node.next;
+      this.head = next;
     }
+    if (next) {
+      next.prev = prev;
+    } else {
+      this.tail = prev;
+    }
+
     this.length--;
 
   }
@@ -163,7 +170,7 @@ let linkedList = new DoublyLinkedList();
 // const l1 = linkedList.append(1);
 // linkedList.append(2);
 // linkedList.append(3);
-linkedList.insertBefore(linkedList.head,2333)
+linkedList.insertBefore(linkedList.head, 2333)
 // linkedList.insertAfter(linkedList.head, 999)
 // linkedList.insertAfter(linkedList.tail, 666)
 // linkedList.insertAfter(linkedList.tail, 888)

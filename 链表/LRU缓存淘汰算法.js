@@ -29,6 +29,7 @@ function LRU(val) {
 
 for (let i = 0; i < 100; i++) {
   LRU(parseInt(Math.random() * 100));
+  // console.log(linkedList.length, linkedList.tail.val)
   linkedList.print();
 }
 
