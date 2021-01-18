@@ -10,6 +10,7 @@ class NodeList {
  */
 class SinglyLinkedList {
   head = null;
+  tail = null;
   length = 0;
 
   /*
@@ -44,7 +45,7 @@ class SinglyLinkedList {
       cur = cur.next;
     }
     //  cur走到这里时,cur.next肯定是null
-    cur.next = newNode;
+    cur.next = this.tail = newNode;
     this.head = guard.next;
     this.length++;
   }
@@ -63,6 +64,7 @@ class SinglyLinkedList {
         cur = cur.next;
       }
     }
+    this.tail = cur;
     this.head = guard.next;  // 重新定义头指针，防止首节点被删除后，this.head指向没变
   }
 
@@ -84,6 +86,26 @@ class SinglyLinkedList {
     return this.head;
   }
 
+  /*
+  思路：
+  1、保存cur的next指针
+  2、改变cur的next指针指向prev
+  3、改变prev指向cur
+  4、改变cur指向保存的next指针
+   */
+  reverse() {
+    let prev;
+    let cur = this.head;
+    while (cur) {
+      const {next} = cur;
+      cur.next = prev;
+      prev = cur;
+      cur = next;
+    }
+    this.tail = this.head;
+    this.head = prev;
+  }
+
   print() {
     let cur = this.head;
     let arr = [];
@@ -101,4 +123,6 @@ list.append(2333)
 list.append(666)
 // list.append(588)
 // list.append(99)
+list.print();
+list.reverse();
 list.print();
