@@ -37,7 +37,7 @@ class SinglyLinkedList {
   }
 
   append(val) {
-    let guard = new NodeList('');
+    let guard = new NodeList('guard');
     guard.next = this.head;
     const newNode = new NodeList(val);
     let cur = guard;
@@ -118,11 +118,15 @@ class SinglyLinkedList {
 
 }
 
-let list = new SinglyLinkedList();
-list.append(2333)
-list.append(666)
+module.exports = {
+  SinglyLinkedList
+}
+
+// let list = new SinglyLinkedList();
+// list.append(2333)
+// list.append(666)
 // list.append(588)
 // list.append(99)
-list.print();
-list.reverse();
-list.print();
+// list.print();
+// list.reverse();
+// list.print();

@@ -12,7 +12,21 @@ class CircularLinkedList {
   length = 0;
 
   append(val) {
+    const newNode = new NodeList(val);
+    let pos = 0;
 
+    let guard = new NodeList('guard');
+    guard.next = this.head;
+    let cur = guard;
+    while (cur.next && pos < this.length) {
+      cur = cur.next;
+      pos++;
+    }
+    // 找到了tail
+    cur.next = this.tail = newNode;
+    this.head = guard.next;
+    newNode.next = this.head;
+    this.length++;
   }
 
   remove(val) {
@@ -22,17 +36,19 @@ class CircularLinkedList {
   print() {
     let arr = [];
     let cur = this.head;
-    while (cur.next !== this.head) {
+    while (cur) {
       arr.push(cur.val);
       cur = cur.next;
+      if (cur === this.head) break;
     }
     console.log(arr.join('->'))
   }
 }
 
 
-
-
+module.exports = {
+  CircularLinkedList
+}
 
 
 

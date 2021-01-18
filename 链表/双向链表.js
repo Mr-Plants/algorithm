@@ -16,7 +16,7 @@ class DoublyLinkedList {
   length = 0;
 
   append2(val) {
-    let guard = new NodeList('');
+    let guard = new NodeList('guard');
     guard.next = this.head;
     let cur = guard;
     const newNode = new NodeList(val);
