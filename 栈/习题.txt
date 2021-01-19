@@ -1,0 +1,10 @@
+1、用数组实现一个顺序栈
+2、用链表实现一个链式栈
+3、编程模拟实现一个浏览器的前进、后退功能
+4、实现一个运算符表达式计算
+
+
+leeCode:
+https://leetcode-cn.com/problems/valid-parentheses/
+https://leetcode-cn.com/problems/longest-valid-parentheses/
+https://leetcode-cn.com/problems/evaluate-reverse-polish-notation/
