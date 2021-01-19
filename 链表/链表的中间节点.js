@@ -9,6 +9,8 @@
 2、根据链表length取中间节点  O(n),O(1)
 3、转化为数组，利用数组随机访问[n/2]   O(n),O(n)
  */
+const {SinglyLinkedList} = require("./单链表");
+
 function middleNode(head) {
   let fast = head;
   let slow = head;
@@ -28,7 +30,7 @@ function middleNode2(head) {
     arr.push(cur);
     cur = cur.next;
   }
-  return arr[arr.length / 2];
+  return arr[Math.trunc(arr.length / 2)];
 }
 
 
@@ -40,16 +42,30 @@ function middleNode3(head) {
     cur = cur.next;
   }
   let i = 0;
-  while ()
+  let node = head;
+  const len = Math.trunc(length / 2);
+  while (i < len) {
+    node = node.next;
+    i++
+  }
+  return node;
 
 }
 
 
+// test
+let ll = new SinglyLinkedList()
+
+ll.append(1)
+ll.append(2)
+ll.append(3)
+ll.append(4)
+ll.append(5)
 
 
-
-
-
+console.log(middleNode(ll.head))
+console.log(middleNode2(ll.head))
+console.log(middleNode3(ll.head))
 
 
 
