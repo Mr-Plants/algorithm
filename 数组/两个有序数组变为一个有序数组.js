@@ -46,11 +46,44 @@ function concat(arr1, arr2) {
 
 }
 
+function merge(arr1, arr2) {
+  let pa = 0, pb = 0;
+  let len1 = arr1.length, len2 = arr2.length;
+  let sortedArr = new Array(len1 + len2);
+
+  while (pa < len1 || pb < len2) {
+    // 如果a已经遍历完了，直接放入b
+    // 如果b已经遍历完了，直接放入a
+    // 如果a<b 放入a
+    // 放入b
+    if (pa === len1) {
+      sortedArr[pa + pb] = arr2[pb++];
+    } else if (pb === len2) {
+      sortedArr[pa + pb] = arr1[pa++];
+    } else if (arr1[pa] > arr2[pb]) {
+      sortedArr[pa + pb] = arr2[pb++];
+    } else {
+      sortedArr[pa + pb] = arr1[pa++];
+    }
+  }
+  return sortedArr;
+}
+
+// todo 方法3，合并为一个数组，排序！快排学完补充
 
 // test
+let arr1 = [1, 3, 5, 7, 9], arr2 = [2, 4, 6, 8, 10]
 
-let arr = concat([1, 3, 5, 7, 9], [2, 4, 6, 8, 10])
+console.log(concat(arr1, arr2))
+console.log(merge(arr1, arr2))
 
-console.log(arr)
 
-console.log(concat([1, 10], [2, 4, 6, 8]))
+
+
+
+
+
+
+
+
+
