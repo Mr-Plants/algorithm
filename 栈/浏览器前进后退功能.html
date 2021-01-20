@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+<body>
+
+<div id="app">
+  <button @click="back"><··· 后退</button>
+
+  <button @click="forward">前进 ···> </button>
+
+  <button @click="open">打开新页面</button>
+
+  <div>当前页面：{{stack1[stack1.length - 1]}}</div>
+  <div>stack1：{{stack1}}</div>
+  <div>stack2：{{stack2}}</div>
+
+</div>
+
+
+<script>
+  new Vue({
+    el: '#app',
+    data: {
+      current: '',
+      stack1: [],
+      stack2: [],
+      page: 0
+    },
+    methods: {
+      forward() {
+        if (this.stack2.length === 0) return;
+        const page = this.stack2.pop();
+        this.stack1.push(page);
+      },
+      back() {
+        if (this.stack1.length === 0) return;
+        const page = this.stack1.pop();
+        this.stack2.push(page);
+      },
+      open() {
+        this.stack2 = [];
+        const page = 'page' + this.page++;
+        this.stack1.push(page);
+      }
+    }
+  })
+</script>
+
+</body>
+</html>

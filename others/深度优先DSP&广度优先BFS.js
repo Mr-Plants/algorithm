@@ -9,5 +9,5 @@ function dfs(data) {
   })
 }
 
-// todo 看完二叉树算法再补齐
+// 看完二叉树算法再补齐
 dfs(tree)

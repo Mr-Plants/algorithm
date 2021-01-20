@@ -165,7 +165,7 @@ ln.append('B')
 ln.append('C')
 let d = ln.append('D')
 console.log(ln.print(), ln.length)
-ln.remove('B')  // todo 有问题
+ln.remove('B')  // 有问题
 console.log(ln.print(), ln.length)
 ln.reverse()
 console.log(ln.print())

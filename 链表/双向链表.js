@@ -121,9 +121,9 @@ class DoublyLinkedList {
 
     let {prev, next} = node;
     // 首先断开自己和链表的关系
-    // todo 不断开好像也没什么关系
+    // 不断开好像也没什么关系
     node.prev = null;
-    node.next = null
+    node.next = null;
     // 然后建立新关系
     if (prev) {
       prev.next = next;
