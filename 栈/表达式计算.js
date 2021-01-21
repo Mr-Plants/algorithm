@@ -19,25 +19,28 @@ function calculate(express) {
   let stack1 = [];
   let stack2 = [];
 
-  let cb = char => {
+  arr.forEach(char => {
     if (isNaN(char)) {
       let head = stack2[stack2.length - 1];
-
-      if (PRIORITY[char] > PRIORITY[head] || !head) {
-        stack2.push(char);
-      } else {
-        let res = math(stack1.pop(), stack1.pop(), stack2.pop());
+      if (head && PRIORITY[char] <= PRIORITY[head]) {
+        let num1 = stack1.pop();
+        let num2 = stack1.pop();
+        let res = math(num2, num1, stack2.pop());
         stack1.push(res);
-        cb(char);
       }
+      stack2.push(char);
     } else {
       stack1.push(char);
     }
+  });
+
+  while (stack2.length > 0) {
+    let num1 = stack1.pop();
+    let num2 = stack1.pop();
+    let res = math(num2, num1, stack2.pop());
+    stack1.push(res);
   }
-
-  arr.forEach(cb);
-
-  return math(stack1[0], stack1[1], stack2[0])
+  return stack1[0];
 }
 
 function math(num1, num2, operator) {
@@ -56,14 +59,12 @@ function math(num1, num2, operator) {
 }
 
 
-// test
+// test 暂不支持两位以上数字，考虑正则匹配
 
 console.log(calculate('4+3*9+5-9/3'))
 
 
-
-
-
+console.log(eval('4+3*9+5-9/3'))
 
 
 
