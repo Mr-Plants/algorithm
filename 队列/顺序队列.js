@@ -11,13 +11,6 @@ class SequenceQueue {
     this.head = 0;
   }
 
-  enqueue2(val) {
-    // tail=length时，代表队列已满
-    if (this.tail === this.length) return false;
-    this.items[this.tail] = val;
-    this.tail++;
-  }
-
   enqueue(val) {
     // enqueue时如果队列满了，需要将head->tail直接的数据搬运到起始位置
     if (this.tail === this.length) {

@@ -117,7 +117,7 @@ class DoublyLinkedList {
 
   // 双向链表支持O(1)时间复杂度内删除一个节点，但是单向链表必须要从头遍历找到被删除节点的prev前驱节点O(n)
   removeByPointer(node) {
-    if (!node || !node instanceof NodeList) return;
+    if (!node || !node instanceof NodeList) return null;
 
     let {prev, next} = node;
     // 首先断开自己和链表的关系
@@ -137,7 +137,7 @@ class DoublyLinkedList {
     }
 
     this.length--;
-
+    return node;
   }
 
   find(val) {
