@@ -25,6 +25,7 @@ const data = [
   },
 ]
 
+// 时间复杂度O(n)，空间复杂度O(n)
 function findRootReferrer(actorID) {
   const actor = data.find(i => i.actor_Id === actorID);
   if (!actor.referrer_id) return actorID;

@@ -25,14 +25,32 @@ function climbStairs(n) {
   return climbStairs(n - 1) + climbStairs(n - 2)
 }
 
+function climbStairs2(n) {
+  if (n <= 2) return n;
+  let p2 = 2;
+  let p1 = 1;
+  let ret = 0;
+  // i从递推公式最小值开始，必须要<=n
+  for (let i = 3; i <= n; i++) {
+    ret = p1 + p2;
+    p1 = p2;
+    p2 = ret;
+  }
+  return ret;
+}
+
 //test
 console.log(climbStairs(3))
-console.log(climbStairs(4))
-console.log(climbStairs(5))
-console.log(climbStairs(6))
 console.log(climbStairs(7))
+console.log(climbStairs2(3))
 
 /*如果一个问题 A 可以分解为若干子问题 B、C、D，你可以假设子问题 B、C、D 已经解决，
 在此基础上思考如何解决问题 A。而且，你只需要思考问题 A 与子问题 B、C、D 两层之间的关系即可，
 不需要一层一层往下思考子问题与子子问题，子子问题与子子子问题之间的关系。屏蔽掉递归细节，这样子理解起来就简单多了。*/
-// todo 将递归转换为迭代
+
+
+/*递归与迭代区别：
+* 递归基础的空间复杂度为O(n)，因为要保留每一层的上下文，迭代空间复杂度为O(1)
+* 递归存在重复计算，可以使用散列表缓存
+* 递归的时间复杂度需要针对性分析，斐波那契数列递归时间复杂度为f(n)
+* 递归容易堆栈溢出，比如fib运算稍微大点的数就会溢出，而迭代不会*/

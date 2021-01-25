@@ -25,5 +25,5 @@ function fib2(n) {
   return ret;
 }
 
-
-console.log(fib2(5))
+console.log(fib(6))
+console.log(fib2(6))
