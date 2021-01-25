@@ -23,31 +23,41 @@ function fullPermutation(arr) {
 }
 
 
+/*
+先取出2个，剩下的元素for循环逐个和前一个(n-1)的全排列做新的全排列
+比如有[1,2,3,4]
+先取出1，2的全排列，
+再将3和1，2的全排列做全排列
+再将4和1，2，3的全排列做全排列
+
+todo 时间复杂度为O(n^3)，空间复杂度为O(n!*n)？，为了完成迭代算法需要arr3这个集合
+arr3每次都会重置，最多的时候会存储arr的全组合n!*n个元素
+ */
 function fullPermutation2(arr) {
   if (arr.length === 1) return [arr];
-  let tar = [];
+
+  let p1 = arr.shift();
+  let p2 = arr.shift();
+  let tar = [[p1, p2], [p2, p1]];
+  let arr3 = []
+  // 把每一个剩下的元素遍历和arr3排列组合
   for (let i = 0; i < arr.length; i++) {
-    let out = [...arr];
-    // return new Array
-    let q = out.splice(i, 1)[0];
-    for (let j = 0; j <= out.length; j++) {
-
-      if (i === j) {
-        continue;
-      } else {
-        let newArr = [...out];
-        newArr.splice(j, 0, q);
-        tar.push(newArr);
-
+    let q = arr[i];
+    for (let j = 0; j < tar.length; j++) {
+      for (let k = 0; k <= tar[j].length; k++) {
+        let newArr = [...tar[j]];
+        newArr.splice(k, 0, q);
+        arr3.push(newArr);
       }
-
     }
+    tar = arr3;   // 加入新一轮循环
+    arr3 = [];   // 重置暂存器
   }
 
   return tar;
 }
 
-console.log(fullPermutation([1, 2, 3]))
-console.log(fullPermutation2([1, 2, 3]))
+console.log(fullPermutation([1, 2, 3, 4]))
+console.log(fullPermutation2([1, 2, 3, 4]))
 
 
