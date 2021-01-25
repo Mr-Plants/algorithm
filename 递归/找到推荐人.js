@@ -43,3 +43,5 @@ console.log(findRootReferrer('E'))
 * 首先缩小问题规模：
 * 要找到我的最终推荐人，需要先找到我的推荐人是谁，再找推荐人的推荐人
 * 递归结束条件就是找不到新的推荐人*/
+
+// todo 递归的时间复杂度分析  https://www.zhihu.com/question/63075755
