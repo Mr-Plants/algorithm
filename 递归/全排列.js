@@ -58,6 +58,7 @@ function fullPermutation2(arr) {
 }
 
 console.log(fullPermutation([1, 2, 3, 4]))
+// todo 有没有更好的思路？
 console.log(fullPermutation2([1, 2, 3, 4]))
 
 
