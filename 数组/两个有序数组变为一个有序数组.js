@@ -77,7 +77,7 @@ let arr1 = [1, 3, 5, 7, 9], arr2 = [2, 4, 6, 8, 10]
 console.log(concat(arr1, arr2))
 console.log(merge(arr1, arr2))
 
-
+//todo 哨兵简化判断？
 
 
 
