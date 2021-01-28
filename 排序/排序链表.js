@@ -41,3 +41,4 @@ list.print();
 
 bubbleSort(list.head)
 list.print();
+// todo 链表
