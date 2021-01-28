@@ -29,11 +29,11 @@ function merge(target, p, q, r) {
   let arr = [];
 
   while (i <= q || j <= r) {
-    if (i > q) {
+    if (i >= q) {
       // 左边已经遍历完了
       arr[j] = target[j];
       j++;
-    } else if (j > r) {
+    } else if (j >= r) {
       arr[i] = target[i];
       i++;
     } else if (target[i] <= target[j]) {
