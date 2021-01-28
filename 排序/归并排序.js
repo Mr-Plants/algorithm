@@ -27,27 +27,41 @@ function merge(target, p, q, r) {
   let i = p;
   let j = q + 1;
   let arr = [];
+  let k = 0;
+
+  // while (i <= q || j <= r) {
+  //   // 这里不能先判断target[i]和target[j]的大小，因为此时i已经大于q，已经越界，应该保存target[j]
+  //   // 但是i越界后等于j，所以target[i] = target[j]，条件成立，结果又保存了target[i]
+  //   // 此时i已经越过数组边界，target[i]取值为undefined
+  //   // 这时才判断条件j>r是否成立，此时j=r，判断没有越界，再次保存target[j]，因为target[i] = target[j]，所以就存了两个重复的值
+  //   if (target[i] <= target[j] || j > r) {
+  //     arr[k++] = target[i++];
+  //   } else {
+  //     arr[k++] = target[j++];
+  //   }
+  // }
 
   while (i <= q || j <= r) {
-    if (i >= q) {
-      // 左边已经遍历完了
-      arr[j] = target[j];
-      j++;
-    } else if (j >= r) {
-      arr[i] = target[i];
-      i++;
+    if (i > q) {
+      arr[k++] = target[j++];
+    } else if (j > r) {
+      arr[k++] = target[i++];
     } else if (target[i] <= target[j]) {
-      arr[i] = target[i];
-      i++;
+      arr[k++] = target[i++];
     } else {
-      arr[j] = target[j];
-      j++;
+      arr[k++] = target[j++];
     }
   }
 
+
   // 搬运
-  for (let k = 0; k < arr.length; k++) {
-    target[k] = arr[k];
+  // 可以用，但语义化不好
+  // while (p<=r) {
+  //   target[r--] = arr[--k]
+  // }
+
+  for (let b = 0; p <= r; p++) {
+    target[p] = arr[b++];
   }
 }
 
@@ -57,6 +71,6 @@ function main(arr) {
 }
 
 // test
-let arr = [2, 4, 3, 1]
+let arr = [5, 3, 2, 1, 4]
 main(arr)
 console.log(arr)
