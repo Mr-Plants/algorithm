@@ -9,7 +9,9 @@
 * 当数组长度为2时，比如下表为[0-1]，此时q=(0+1)/2=0,对于第一个mergeSort(p,q)，p=0,q=0，就可以终止分解（递）了
 * */
 
-
+/*
+* 算法merge不会改变相同元素顺序，属于稳定排序
+* 算法的空间复杂度为O(n)，不属于原地排序*/
 function mergeSort(arr, p, r) {
   if (p >= r) return;
   let q = Math.floor((p + r) / 2);
@@ -33,7 +35,8 @@ function merge(target, p, q, r) {
   //   // 这里不能先判断target[i]和target[j]的大小，因为此时i已经大于q，已经越界，应该保存target[j]
   //   // 但是i越界后等于j，所以target[i] = target[j]，条件成立，结果又保存了target[i]
   //   // 此时i已经越过数组边界，target[i]取值为undefined
-  //   // 这时才判断条件j>r是否成立，此时j=r，判断没有越界，再次保存target[j]，因为target[i] = target[j]，所以就存了两个重复的值
+  //   // 这时才判断条件j>r是否成立，此
+  //   时j=r，判断没有越界，再次保存target[j]，因为target[i] = target[j]，所以就存了两个重复的值
   //   if (target[i] <= target[j] || j > r) {
   //     arr[k++] = target[i++];
   //   } else {
@@ -46,6 +49,7 @@ function merge(target, p, q, r) {
       arr[k++] = target[j++];
     } else if (j > r) {
       arr[k++] = target[i++];
+      // 不会改变相同元素顺序，属于稳定排序
     } else if (target[i] <= target[j]) {
       arr[k++] = target[i++];
     } else {
@@ -60,8 +64,8 @@ function merge(target, p, q, r) {
   //   target[r--] = arr[--k]
   // }
 
-  for (let b = 0; p <= r; p++) {
-    target[p] = arr[b++];
+  for (let b = 0; b < arr.length; b++) {
+    target[p++] = arr[b];
   }
 }
 
@@ -71,6 +75,6 @@ function main(arr) {
 }
 
 // test
-let arr = [5, 3, 2, 1, 4]
+let arr = [10, 5, 3, 2, 1, 9, 4]
 main(arr)
 console.log(arr)
