@@ -11,7 +11,8 @@
 
 /*
 * 算法merge不会改变相同元素顺序，属于稳定排序
-* 算法的空间复杂度为O(n)，不属于原地排序*/
+* 算法的空间复杂度为O(n)+O(log n) log n可以忽略，不属于原地排序。每次合并数组时最大会占用内存空间O(n)，因为在某一时刻只会有一个函数调用栈
+* 算法的时间复杂度可以使用递推公式计算O(n)=O(n/2)+O(n/2)+O(n)，最终为n+nlog n，根绝加法法则最终为nlog n*/
 function mergeSort(arr, p, r) {
   if (p >= r) return;
   let q = Math.floor((p + r) / 2);
@@ -28,6 +29,7 @@ function mergeSort(arr, p, r) {
 function merge(target, p, q, r) {
   let i = p;
   let j = q + 1;
+  // fixme 归并排序真的不能原地排序吗？
   let arr = [];
   let k = 0;
 
