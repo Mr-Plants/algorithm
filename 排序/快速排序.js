@@ -10,6 +10,7 @@
 /*
 * 空间复杂度为O(1)，是原地排序
 * 排序过程中arr[i]和arr[j]交换可能会破坏相同元素顺序，所以不是稳定排序
+* 空间复杂度为n*logN
 * */
 function quickSort(arr, p, r) {
   if (p >= r) return;
@@ -22,7 +23,7 @@ function quickSort(arr, p, r) {
 
 /**
  * 在[p-r]之间选择一个节点q，比q小的放到左边，大的放右边
- * 因为快排是原地排序，所以空间复杂度要为O(1)，直接改变原数组
+ * 因为快排是原地排序，所以空间复杂度要为O(1)，所以需要直接改变原数组
  * @param arr
  * @param p
  * @param r
