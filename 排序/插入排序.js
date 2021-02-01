@@ -33,7 +33,7 @@ function insertionSort2(arr) {
 
   // i=1是因为需要给已排序空间默认一个元素，才能继续对比
   for (let i = 1; i < arr.length; i++) {
-    let value = arr[i];
+    let value = arr[i];  // 必须要先保存起来，否则可能被后来的元素覆盖
     let j = i - 1;
     // fixme 这里倒序比正序代码简洁很多，值得思考
     for (; j >= 0; j--) {

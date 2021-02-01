@@ -189,7 +189,7 @@ linkedList.print();
 // linkedList.print();
 
 /*
-todo 重要！！！
+fixme 重要！！！
 写完链表后一定要作如下检查：
 1、如果链表是空（head=null），操作是否正常
 2、如果链表只有一个元素（head=tail），操作是否正常

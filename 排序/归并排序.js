@@ -6,13 +6,13 @@
 * 递推公式推导
 * mergeSort(n)= mergeSort(p,q) && mergeSort(q+1,r)  q=length/2
 * 终止条件
-* 当数组长度为2时，比如下表为[0-1]，此时q=(0+1)/2=0,对于第一个mergeSort(p,q)，p=0,q=0，就可以终止分解（递）了
+* 当数组长度为2时，比如下标为[0-1]，此时q=(0+1)/2=0,对于第一个mergeSort(p,q)，p=0,q=0，就可以终止分解（递）了
 * */
 
 /*
 * 算法merge不会改变相同元素顺序，属于稳定排序
 * 算法的空间复杂度为O(n)+O(log n) log n可以忽略，不属于原地排序。每次合并数组时最大会占用内存空间O(n)，因为在某一时刻只会有一个函数调用栈
-* 算法的时间复杂度可以使用递推公式计算O(n)=O(n/2)+O(n/2)+O(n)，最终为n+nlog n，根绝加法法则最终为nlog n*/
+* 算法的时间复杂度可以使用递推公式计算O(n)=O(n/2)+O(n/2)+O(n)，最终为n+n*log n，根绝加法法则最终为N*logN */
 function mergeSort(arr, p, r) {
   if (p >= r) return;
   let q = Math.floor((p + r) / 2);
