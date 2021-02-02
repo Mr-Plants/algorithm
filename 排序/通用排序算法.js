@@ -28,11 +28,20 @@ function sort(arr) {
     return arr;
   }
 
+  let partition = (arr, from, to) => {
+    let v0 = arr[from];
+    let v1 = arr[to];
+    let p = arr[(from + to) / 2];
+  }
+
   let quickSort = (arr, from, to) => {
 
     if (arr.length <= 10) return insertSort(arr);
 
+    let pivot = partition(arr, from, to);
 
+    quickSort(arr, from, pivot - 1);
+    quickSort(arr, pivot - 1, to);
   }
 
   return arr;
