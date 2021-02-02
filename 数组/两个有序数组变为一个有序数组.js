@@ -70,6 +70,9 @@ function merge(arr1, arr2) {
 }
 
 // todo 方法3，合并为一个数组，排序！快排学完补充
+function merge2(arr1, arr2) {
+
+}
 
 // test
 let arr1 = [1, 3, 5, 7, 9], arr2 = [2, 4, 6, 8, 10]

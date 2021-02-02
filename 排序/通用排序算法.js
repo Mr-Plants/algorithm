@@ -31,10 +31,16 @@ function sort(arr) {
   let partition = (arr, from, to) => {
     let v0 = arr[from];
     let v1 = arr[to];
-    let p = arr[(from + to) / 2];
+    const third_index = (from + to) >> 1;
+    let v2 = arr[third_index];
+
+    if (v0 >= v1) {
+
+    }
   }
 
   let quickSort = (arr, from, to) => {
+    if (from >= to) return arr;
 
     if (arr.length <= 10) return insertSort(arr);
 
@@ -43,6 +49,8 @@ function sort(arr) {
     quickSort(arr, from, pivot - 1);
     quickSort(arr, pivot - 1, to);
   }
+
+  quickSort(arr, 0, arr.length - 1);
 
   return arr;
 }
