@@ -1,14 +1,28 @@
 // 二分查找
 
 
-function binarySearch(arr, val, low, high) {
+function binarySearch(arr, value, low, high) {
 
-  let mid = low + ((high - low) >> 1);
+  while (low <= high) {
+    let mid = low + ((high - low) >> 1);
+    if (arr[mid] === value) return mid;
+    if (arr[mid] < value) {
+      low = mid + 1;
+    } else {
+      high = mid - 1;
+    }
+  }
 
-  while ()
+  return -1;
 }
 
 
 function main(arr, value) {
-  binarySearch(arr.value, 0, arr.length - 1);
+  return binarySearch(arr, value, 0, arr.length - 1);
 }
+
+
+// test
+let arr = [1, 2, 3, 5, 6, 7, 8, 9]
+console.log(main(arr, 5))
+console.log(main(arr, 11))
