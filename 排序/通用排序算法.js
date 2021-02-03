@@ -31,7 +31,7 @@ function sort(arr) {
   let partition = (arr, from, to) => {
     let v0 = arr[from];
     let v1 = arr[to];
-    const third_index = (from + to) >> 1;
+    const third_index = from + ((to - from) >> 1);
     let v2 = arr[third_index];
 
     if (v0 >= v1) {

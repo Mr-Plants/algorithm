@@ -29,7 +29,7 @@ function quickSort(arr, p, r) {
  * @param r
  */
 function partition(arr, p, r) {
-  let pivot = arr[r];
+  let pivot = arr[r];   // 虽然pivot的值没有变过，但是有可能会使用三点取中法等等，不一定总是取最后一位，所以最好保存为变量
   let i = p;
 
   /*
@@ -40,8 +40,15 @@ function partition(arr, p, r) {
   4、走进这个方法length>=2
 
   可以推导的结论
+  假设数据是[2,1,4,2]
+  [1,2,4,2]
+  交换2
+  如果是<=
+  [2,1,4,2]
+  [2,1,4,2]
+
   1、分区算法会破坏稳定性，能不能把条件改成<=?
-  2、
+  2、可以把判断条件该外<=，但是依然会破坏稳定性，而且会增加不必要的操作，自己更换自己
 
   * */
   for (let j = p; j < r; j++) {
@@ -65,6 +72,7 @@ function main(arr) {
 
 // test
 let arr = [3, 6, 2, 8, 5, 1];
+// let arr = [2,1,4,2];
 main(arr)
 console.log(arr)
 
