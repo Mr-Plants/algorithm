@@ -32,6 +32,18 @@ function partition(arr, p, r) {
   let pivot = arr[r];
   let i = p;
 
+  /*
+  初步结论
+  1、i停留的位置一定是>=pivot的
+  2、最终j=r
+  3、pivot的值始终没变过
+  4、走进这个方法length>=2
+
+  可以推导的结论
+  1、分区算法会破坏稳定性，能不能把条件改成<=?
+  2、
+
+  * */
   for (let j = p; j < r; j++) {
     if (arr[j] < pivot) {
       let temp = arr[i];
