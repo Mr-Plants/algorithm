@@ -1,6 +1,6 @@
 // 二分查找
 
-
+/*时间复杂度为O(log n *O(1)=O(logN)*/
 function binarySearch(arr, value, low, high) {
 
   while (low <= high) {
