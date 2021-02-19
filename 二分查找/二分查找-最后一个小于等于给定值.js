@@ -30,3 +30,5 @@ function main(arr, val) {
 let arr = [1, 2, 3, 4, 4, 4, 5, 6, 7, 8]
 console.log(main(arr, 4))
 console.log(main(arr, 5))
+console.log(main(arr, 10))
+console.log(main(arr, 0))
