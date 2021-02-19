@@ -9,7 +9,7 @@ function binarySearch(arr, val) {
     let mid = low + ((high - low) >> 1);
     if (arr[mid] === val) return mid;
 
-    // todo 这里要怎么判断比较好？
+    // todo 这里要怎么判断比较好？参考leecode33
     if (arr[low] < arr[mid]) {
 
     } else {
