@@ -23,7 +23,7 @@
     let timer = null
     return function () {
       if (timer) {
-        clearTimeout(timer)
+        clearTimeout(timer);
       }
       console.log(this)  // 此处this依然正常
       timer = setTimeout(() => {
