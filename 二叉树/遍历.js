@@ -41,12 +41,12 @@ function preOrder(root) {
     preOrder(root.left);
     preOrder(root.right);
 }
-
 /**
  * 后续遍历：左节点->右节点->自己
  * @param root
  */
 function postOrder(root) {
+    console.log('-> ',root)
     if (!root) return;
     postOrder(root.left);
     postOrder(root.right);
