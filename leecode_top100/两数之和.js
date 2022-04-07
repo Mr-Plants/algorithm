@@ -9,25 +9,22 @@
  * @return {number[]}
  */
 function twoSum(nums, target) {
-    let res = [];
-    let obj = {};
+    // 保存遍历过的值,key是number，value是索引
+    let map = {};
     for (let i = 0; i < nums.length; i++) {
-        const v1 = nums[i];
-        const v2Index = obj[target - v1];
-        obj[v1] = i;
-        if (i === v2Index) continue;
-        if (typeof v2Index !== "undefined") {
-            res.push(i);
-            res.push(v2Index);
-            return res;
+        // 如果map中已经有可以配对的值，就return
+        let v = target - nums[i];
+        if (typeof map[v] !== "undefined") {
+            return [map[v], i]
         }
+        map[nums[i]] = i;
     }
 
-    return res
+    return []
 }
 
 
 // test
-const arr = [1, 3, 5, 2, 4, 6, 8, 6, 7];
+const arr = [1, 1, 5, 2, 4, 6, 8, 6, 7];
 
-console.log(twoSum(arr, 13))
+console.log(twoSum(arr, 5))
