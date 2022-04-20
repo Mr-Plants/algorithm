@@ -41,14 +41,14 @@ class Graph{
     this.v=v;
   }
 
-  bfs(s,t){
-    if(s===t) return;
-    let visited=[];
-    visited[s]=true;
-    let queue = [];
-    queue.push(s);
-    let prev=[];
-    prev[]
-  }
+  // bfs(s,t){
+  //   if(s===t) return;
+  //   let visited=[];
+  //   visited[s]=true;
+  //   let queue = [];
+  //   queue.push(s);
+  //   let prev=[];
+  //   prev[]
+  // }
 }
 
